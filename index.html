@@ -141,19 +141,15 @@
   </div>
 
   <h3>Locomotion Principle</h3>
-  <div class="grid-2">
-    <div class="prose">
+  <div class="prose">
       <div class="eq">\[\mathbf{r}^B_G = \mathbf{r}^B_{G,0} + \frac{1}{M}\sum_{i=1}^{3} m_i q_i \mathbf{e}^B_i \tag{1}\]</div>
       <p>On land, mass redistribution creates a horizontal offset between the center of mass and the ground contact. Gravity then produces a moment that rotates the body. For a horizontal lever arm \(d\), the gravitational moment has magnitude \(\tau_g = Mgd\). With sufficient tangential traction, the shell rolls without slip. As the body rotates, the controller continuously updates the slider positions to maintain the center-of-mass bias toward the commanded direction.</p>
       <p>On the water’s surface, the same mass redistribution offsets the center of mass from the line of action of buoyancy and generates body rotation. The submerged fins experience hydrodynamic forces as the shell rotates. Fins above the waterline encounter substantially lower resistance, producing an asymmetric interaction over the rotating shell and net surface propulsion [28]. Aquatic motion uses the same three active sliders as terrestrial locomotion. The change in locomotion mode arises from the interaction between the rotating shell and the surrounding medium.</p>
-    </div>
-    <figure>
-      <div class="fig-img"><img src="media/figures/fig3-principle.png" alt="Locomotion principle: displacing the internal slider masses offsets the center of gravity and the shell rolls" loading="lazy"></div>
-    </figure>
   </div>
 
   <figure class="spacer">
-    <div class="grid-4 sim">
+    <div class="fig-img principle"><img src="media/figures/fig3-principle.svg" width="894" height="174" alt="Displacing the internal slider masses offsets the center of gravity from the shell center, and the resulting moment about the ground contact rolls the shell" loading="lazy"></div>
+    <div class="grid-4 sim spacer">
       <div class="slot" data-video="media/videos/fig3-ground-geometric.mp4" data-aspect="4/3" aria-label="Ground, geometric controller"><span class="media-frame"><span class="slot-label">Ground · geometry</span></span></div>
       <div class="slot" data-video="media/videos/fig3-ground-learned.mp4" data-aspect="4/3" aria-label="Ground, learned controller"><span class="media-frame"><span class="slot-label">Ground · learned</span></span></div>
       <div class="slot" data-video="media/videos/fig3-water-geometric.mp4" data-aspect="4/3" aria-label="Water, geometric controller"><span class="media-frame"><span class="slot-label">Water · geometry</span></span></div>

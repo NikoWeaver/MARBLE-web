@@ -148,3 +148,5 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
   .grid-2, .grid-4.sim { grid-template-columns: 1fr; }
   .section { padding: 40px 16px; }
 }
+
+.principle img { width: 100%; height: auto; }
