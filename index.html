@@ -29,7 +29,9 @@
 
 <header class="hero" id="top">
   <h1><span class="h1-line">Omnidirectional Amphibious Locomotion</span> <span class="h1-line">via Internal Mass Actuation</span></h1>
-  <p class="byline">Anonymous Author(s)</p>
+  <p class="byline">Anonymous Authors</p>
+  <p class="affiliation">Anonymous Institution</p>
+  <p class="hero-note">Anonymized submission; the authors and the affiliation are withheld. The software and the hardware design will be open sourced on acceptance.</p>
 </header>
 
 <!-- ============ Overview: Fig. 1 ============ -->
@@ -83,13 +85,8 @@
   </div>
 
   <figure>
-    <div class="fig-img">
-      <div class="grid-4">
-        <img src="media/figures/fig2a.png" alt="(a) Linear mass-slider module with dimensions" loading="lazy">
-        <img src="media/figures/fig2b.png" alt="(b) Internal configuration with three orthogonal sliders and the electronics capsule" loading="lazy">
-        <img src="media/figures/fig2c.png" alt="(c) Internal frame without the outer shell" loading="lazy">
-        <img src="media/figures/fig2d.png" alt="(d) Complete robot with the sealed shell and passive fins" loading="lazy">
-      </div>
+    <div class="fig-img principle">
+      <img src="media/figures/fig2-mechanical.png" width="2400" height="708" alt="(a) Linear mass-slider module. (b) Internal configuration with three orthogonal sliders and the electronics capsule. (c) Internal frame without the outer shell. (d) Complete robot with the sealed shell and passive fins." loading="lazy">
     </div>
     <figcaption><strong>Fig. 2. Mechanical design of MARBLE.</strong> (a) Linear mass-slider module. (b) Internal configuration with three orthogonal sliders and the electronics capsule. (c) Internal frame without the outer shell. (d) Complete robot with the sealed shell and passive fins.</figcaption>
   </figure>
@@ -305,7 +302,7 @@
         </div>
       </div>
     </div>
-    <figcaption><strong>Fig. 5.</strong> Measured velocity vectors under joystick commands for (a) the learned controller and (b) the geometric controller. Velocities are estimated by numerical differentiation of camera-relative trajectories and plotted from a common origin. Each panel contains 3,518 samples with identical axis and color scales.</figcaption>
+    <figcaption><strong>Fig. 5.</strong> Measured velocity vectors under joystick commands for (a) the learned controller and (b) the geometric controller. Velocities are estimated by numerical differentiation of camera-relative trajectories and plotted from a common origin. Each panel contains 7,568 samples with identical axis and color scales.</figcaption>
   </figure>
   <div class="prose spacer">
     <p>Fig. 5 presents segmented velocity responses collected across different commanded headings. The distribution of velocity vectors over the full 360° range demonstrated that MARBLE’s actuation mechanism can produce planar motion across arbitrary directions without a preferred fixed heading. This capability arose from coordinated mass redistribution along the three mutually orthogonal body axes.</p>
@@ -324,8 +321,8 @@
       <li><button type="button" class="step-chip" data-seek=""><span class="step-time">–:––</span><span class="step-label">contact</span></button></li>
       <li><button type="button" class="step-chip" data-seek=""><span class="step-time">–:––</span><span class="step-label">push</span></button></li>
     </ol>
-    <div class="fig-img spacer"><img src="media/figures/fig6-sequence.png" alt="Time-lapse sequence of approach, contact, and push against a buoy" loading="lazy"></div>
-    <figcaption><strong>Fig. 6.</strong> Representative time-lapse sequence of obstacle interaction showing approach, direct shell contact, and continuous interaction with the buoy (red). Orange arrows indicate the robot’s movement direction.</figcaption>
+    <div class="fig-img spacer"><img src="media/figures/fig6-sequence.jpg" alt="Representative time-lapse sequence of obstacle interaction showing approach, direct shell contact, and continuous interaction with the buoy" loading="lazy"></div>
+    <figcaption><strong>Fig. 6.</strong> Representative time-lapse sequence of obstacle interaction showing approach, direct shell contact, and continuous interaction with the buoy (red).</figcaption>
   </figure>
   <div class="todo">
     <h4>TODO: set chip times</h4>
@@ -373,7 +370,7 @@
   </div>
 </section>
 
-<footer class="site-footer">Anonymous Author(s)</footer>
+<footer class="site-footer">Anonymous Authors</footer>
 
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body,{delimiters:[{left:'\\[',right:'\\]',display:true},{left:'\\(',right:'\\)',display:false}],throwOnError:false})"></script>
