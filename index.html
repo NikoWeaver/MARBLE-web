@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
-<link rel="stylesheet" href="style.css?v=4">
+<link rel="stylesheet" href="style.css?v=5">
 </head>
 <body>
 
@@ -41,11 +41,11 @@
   </div>
   <figure>
     <div class="lead">
-      <div class="slot" data-video="media/videos/fig1a-land-to-water.mp4" data-poster="media/posters/fig1a.jpg" data-speed="" aria-label="Land-to-water entry">
+      <div class="slot" data-video="media/videos/fig1a-land-to-water.mp4" data-poster="media/posters/fig1a.jpg" aria-label="Land-to-water entry">
         <span class="media-frame"><span class="slot-label">(a)</span></span>
       </div>
       <div class="lead-side">
-        <div class="slot" data-video="media/videos/fig1b-terrestrial.mp4" data-poster="media/posters/fig1b.jpg" aria-label="Terrestrial rolling">
+        <div class="slot" data-video="media/videos/fig1b-terrestrial.mp4" data-poster="media/posters/fig1b.jpg" data-speed="4×" aria-label="Terrestrial rolling">
           <span class="media-frame"><span class="slot-label">(b)</span></span>
         </div>
         <div class="slot" data-video="media/videos/fig1c-water.mp4" data-poster="media/posters/fig1c.jpg" aria-label="Water-surface propulsion">
@@ -167,7 +167,7 @@
   <figure>
     <div class="grid-3">
       <div class="stack">
-        <div class="slot" data-video="media/videos/fig4a-terrestrial.mp4" data-poster="media/posters/fig4a.jpg" data-aspect="4/3" aria-label="Terrestrial locomotion"><span class="media-frame"><span class="slot-label">(a) terrestrial</span></span></div>
+        <div class="slot" data-video="media/videos/fig4a-terrestrial.mp4" data-poster="media/posters/fig4a.jpg" data-speed="6×" data-aspect="4/3" aria-label="Terrestrial locomotion"><span class="media-frame"><span class="slot-label">(a) terrestrial</span></span></div>
         <div class="fig-img"><img src="media/figures/fig4a-traj.png" alt="Planar position trajectory, terrestrial locomotion" loading="lazy"></div>
         <div class="stats">
           <div class="stat"><b>10.60 m</b><span>traveled</span></div>
@@ -177,7 +177,7 @@
         </div>
       </div>
       <div class="stack">
-        <div class="slot" data-video="media/videos/fig4b-aquatic.mp4" data-poster="media/posters/fig4b.jpg" data-aspect="4/3" aria-label="Aquatic locomotion"><span class="media-frame"><span class="slot-label">(b) aquatic</span></span></div>
+        <div class="slot" data-video="media/videos/fig1c-water.mp4" data-poster="media/posters/fig4b.jpg" data-aspect="4/3" aria-label="Aquatic locomotion"><span class="media-frame"><span class="slot-label">(b) aquatic</span></span></div>
         <div class="fig-img"><img src="media/figures/fig4b-traj.png" alt="Planar position trajectory, aquatic locomotion" loading="lazy"></div>
         <div class="stats">
           <div class="stat"><b>5.24 m</b><span>traveled</span></div>
@@ -187,7 +187,7 @@
         </div>
       </div>
       <div class="stack">
-        <div class="slot" data-video="media/videos/fig4c-transition.mp4" data-poster="media/posters/fig4c.jpg" data-aspect="4/3" aria-label="Transitional locomotion"><span class="media-frame"><span class="slot-label">(c) transitional</span></span></div>
+        <div class="slot" data-video="media/videos/fig4c-transition.mp4" data-poster="media/posters/fig4c.jpg" data-speed="2×" data-aspect="4/3" aria-label="Transitional locomotion"><span class="media-frame"><span class="slot-label">(c) transitional</span></span></div>
         <div class="fig-img"><img src="media/figures/fig4c-traj.png" alt="Planar position trajectory, transitional locomotion" loading="lazy"></div>
         <div class="stats">
           <div class="stat"><b>5.21 m</b><span>traveled</span></div>
@@ -208,7 +208,7 @@
   <figure>
     <div class="grid-2">
       <div class="stack">
-        <div class="slot" data-video="media/videos/fig5a-learned.mp4" aria-label="Learned controller, joystick commands"><span class="media-frame"><span class="slot-label">(a) Learned controller</span></span></div>
+        <div class="slot" data-video="media/videos/fig5a-learned.mp4" data-speed="6×" aria-label="Learned controller, joystick commands"><span class="media-frame"><span class="slot-label">(a) Learned controller</span></span></div>
         <div class="fig-img velocity"><img src="media/figures/fig5a-learned.png" width="1100" height="1004" alt="Measured velocity vectors, learned controller" loading="lazy"></div>
         <div class="stats">
           <div class="stat"><b>0.348 ± 0.114 m/s</b><span>mean speed</span></div>
@@ -218,7 +218,7 @@
         </div>
       </div>
       <div class="stack">
-        <div class="slot" data-video="media/videos/fig5b-geometric.mp4" aria-label="Geometric controller, joystick commands"><span class="media-frame"><span class="slot-label">(b) Geometric controller</span></span></div>
+        <div class="slot" data-video="media/videos/fig5b-geometric.mp4" data-speed="6×" aria-label="Geometric controller, joystick commands"><span class="media-frame"><span class="slot-label">(b) Geometric controller</span></span></div>
         <div class="fig-img velocity"><img src="media/figures/fig5b-geometric.png" width="1400" height="997" alt="Measured velocity vectors, geometric controller" loading="lazy"></div>
         <div class="stats">
           <div class="stat"><b>0.252 ± 0.088 m/s</b><span>mean speed</span></div>
@@ -237,7 +237,7 @@
     <p>One sentence: what happens when the shell pushes the buoy in Fig. 6.</p>
   </div>
   <figure>
-    <div class="slot" data-video="media/videos/fig6-buoy-push.mp4" aria-label="Obstacle interaction with a buoy"><span class="media-frame"></span></div>
+    <div class="slot" data-video="media/videos/fig6-buoy-push.mp4" data-speed="4×" aria-label="Obstacle interaction with a buoy"><span class="media-frame"></span></div>
     <ol class="steps" aria-label="Phases in this run">
       <li><button type="button" class="step-chip" data-seek=""><span class="step-time">–:––</span><span class="step-label">approach</span></button></li>
       <li><button type="button" class="step-chip" data-seek=""><span class="step-time">–:––</span><span class="step-label">contact</span></button></li>
@@ -290,6 +290,6 @@
 
 <footer class="site-footer">Anonymous Authors</footer>
 
-<script src="main.js?v=4"></script>
+<script src="main.js?v=5"></script>
 </body>
 </html>
