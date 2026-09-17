@@ -174,8 +174,9 @@ figcaption strong { color: var(--ink-2); }
 
 /* Stat tiles */
 .stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 12px; }
-.stat { background: var(--bg-soft); border: 1px solid var(--rule); border-radius: 8px; padding: 10px 12px; }
-.stat b { display: block; font-size: 18px; font-variant-numeric: tabular-nums; word-break: break-word; }
+.stat { min-width: 0; background: var(--bg-soft); border: 1px solid var(--rule); border-radius: 8px; padding: 10px clamp(8px, 1vw, 12px); }
+.stat b { display: block; font-size: clamp(13px, 1.25vw, 16px); font-variant-numeric: tabular-nums; white-space: nowrap; overflow-wrap: normal; }
+@media (max-width: 400px) { .stat b { white-space: normal; overflow-wrap: anywhere; } }
 .stat span { font-size: 12px; color: var(--ink-3); }
 
 /* Equations and tables */
@@ -419,7 +420,7 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
 .sim-label strong { color: var(--ink); font-weight: 700; }
 
 /* Additional trials: one video and three photos in a uniform 4:3 grid */
-.gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 .gallery-photo { aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; background: var(--slot); }
 .gallery-photo img { width: 100%; height: 100%; object-fit: cover; }
 .gallery-item figcaption { margin-top: 8px; text-align: center; }
