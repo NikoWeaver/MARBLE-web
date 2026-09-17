@@ -58,7 +58,7 @@
       if (!figure) return;
       const chips = figure.querySelectorAll(".step-chip");
       if (!chips.length) return;
-      const cur = v.currentTime;
+      const cur = (slot._offset || 0) + v.currentTime;
       let activeChip = null;
       chips.forEach((chip) => {
         const seek = parseFloat(chip.dataset.seek);
@@ -70,27 +70,15 @@
         c.setAttribute("aria-pressed", isCurrent ? "true" : "false");
       });
     });
-    // Some hosts (e.g. anonymous.4open.science) ignore HTTP Range requests, so the
-    // browser reports nothing seekable and step chips snap back to 0. When that
-    // happens, fetch the whole clip once and play it from a Blob URL, which is
-    // always seekable, then re-apply any seek the viewer asked for.
-    v.addEventListener("loadedmetadata", () => {
-      const canSeek = v.seekable.length > 0 && v.seekable.end(v.seekable.length - 1) > 0;
-      if (canSeek || slot._blobTried || !window.fetch || !window.URL) return;
-      slot._blobTried = true;
-      fetch(slot.dataset.video)
-        .then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
-        .then((blob) => {
-          const wasPlaying = !v.paused;
-          const resumeAt = slot._pendingSeek != null ? slot._pendingSeek : v.currentTime;
-          v.src = URL.createObjectURL(blob);
-          v.addEventListener("loadedmetadata", () => {
-            try { v.currentTime = resumeAt; } catch (e) {}
-            if (wasPlaying || slot._pendingSeek != null) v.play().catch(() => {});
-          }, { once: true });
-        })
-        .catch(() => {});
-    }, { once: true });
+    // When playing a pre-cut "from-Ns" clip (see step chips below), return to the
+    // full looping clip once it ends.
+    v.addEventListener("ended", () => {
+      if (!slot._offset) return;
+      slot._offset = 0;
+      v.loop = true;
+      v.src = slot.dataset.video;
+      v.play().catch(() => {});
+    });
     v.src = slot.dataset.video;
     frame.append(v);
     slot._video = v;
@@ -124,9 +112,33 @@
       const v = slot._video;
       if (!v) return;
       slot._pendingSeek = t;
+      // anonymous.4open.science ignores HTTP Range requests and sandboxes the page
+      // (no fetch to self), so the browser cannot seek. Slots with data-seek-clips
+      // ship pre-cut clips named <video>-from-<t>s.mp4 that start at each chip time.
+      const canSeek = () => v.seekable.length > 0 && v.seekable.end(v.seekable.length - 1) > 0;
+      const playFrom = (src, offset, then) => {
+        slot._offset = offset;
+        v.loop = offset === 0;
+        if (v.getAttribute("src") !== src) {
+          v.addEventListener("loadedmetadata", () => { if (then) then(); v.play().catch(() => {}); }, { once: true });
+          v.src = src;
+        } else {
+          if (then) then();
+          v.play().catch(() => {});
+        }
+      };
       const doSeek = () => {
-        try { v.currentTime = slot._pendingSeek; } catch (e) {}
-        v.play().catch(() => {});
+        const target = slot._pendingSeek;
+        const base = slot.dataset.video;
+        if (canSeek() && !slot._offset) {
+          try { v.currentTime = target; } catch (e) {}
+          v.play().catch(() => {});
+        } else if (slot.dataset.seekClips !== undefined) {
+          const src = target > 0 ? base.replace(/\.mp4$/, "-from-" + target + "s.mp4") : base;
+          playFrom(src, target, () => { try { v.currentTime = 0; } catch (e) {} });
+        } else {
+          playFrom(base, 0, () => { try { v.currentTime = target; } catch (e) {} });
+        }
       };
       if (v.readyState >= 1) {
         doSeek();
