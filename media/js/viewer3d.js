@@ -150,6 +150,31 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
   robotRoot.rotation.x = -Math.PI / 2;
   scene.add(robotRoot);
 
+  // Subtle contact shadow plane on ground below robot
+  const shadowCanvas = document.createElement("canvas");
+  shadowCanvas.width = 128;
+  shadowCanvas.height = 128;
+  const shadowCtx = shadowCanvas.getContext("2d");
+  const shadowGrad = shadowCtx.createRadialGradient(64, 64, 4, 64, 64, 62);
+  shadowGrad.addColorStop(0, "rgba(0, 0, 0, 0.25)");
+  shadowGrad.addColorStop(0.35, "rgba(0, 0, 0, 0.10)");
+  shadowGrad.addColorStop(0.7, "rgba(0, 0, 0, 0.025)");
+  shadowGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
+  shadowCtx.fillStyle = shadowGrad;
+  shadowCtx.fillRect(0, 0, 128, 128);
+
+  const shadowTex = new THREE.CanvasTexture(shadowCanvas);
+  const shadowGeo = new THREE.PlaneGeometry(0.52, 0.52);
+  const shadowMat = new THREE.MeshBasicMaterial({
+    map: shadowTex,
+    transparent: true,
+    depthWrite: false
+  });
+  const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
+  shadowMesh.rotation.x = -Math.PI / 2;
+  shadowMesh.position.y = -0.196;
+  scene.add(shadowMesh);
+
   const frameGroup = new THREE.Group();
   const shellGroup = new THREE.Group();
   robotRoot.add(frameGroup);

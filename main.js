@@ -112,4 +112,26 @@
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   targets.forEach((t) => navIo.observe(t));
+
+  // Color theme toggle (default light).
+  const themeToggle = document.getElementById("theme-toggle");
+  if (themeToggle) {
+    const updateThemeLabel = (theme) => {
+      const isDark = theme === "dark";
+      themeToggle.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
+      themeToggle.title = isDark ? "Switch to light theme" : "Switch to dark theme";
+    };
+    const currentTheme = document.documentElement.getAttribute("data-theme") || "light";
+    updateThemeLabel(currentTheme);
+
+    themeToggle.addEventListener("click", () => {
+      const current = document.documentElement.getAttribute("data-theme") || "light";
+      const next = current === "dark" ? "light" : "dark";
+      document.documentElement.setAttribute("data-theme", next);
+      try {
+        localStorage.setItem("theme", next);
+      } catch (e) {}
+      updateThemeLabel(next);
+    });
+  }
 })();
