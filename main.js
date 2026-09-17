@@ -37,7 +37,7 @@
     v.muted = true;
     v.loop = true;
     v.playsInline = true;
-    v.preload = "metadata";
+    v.preload = "auto";
     if (slot.dataset.poster) v.poster = slot.dataset.poster;
     v.setAttribute("aria-label", slot.getAttribute("aria-label") || "");
     v.addEventListener("loadeddata", () => {
@@ -51,6 +51,19 @@
       v.play().catch(() => { v.controls = true; link.hidden = false; });
     }, { once: true });
     v.addEventListener("error", () => v.remove(), { once: true });
+    v.addEventListener("timeupdate", () => {
+      const figure = slot.closest("figure");
+      if (!figure) return;
+      const chips = figure.querySelectorAll(".step-chip");
+      if (!chips.length) return;
+      const cur = v.currentTime;
+      let activeChip = null;
+      chips.forEach((chip) => {
+        const seek = parseFloat(chip.dataset.seek);
+        if (!Number.isNaN(seek) && cur >= seek) activeChip = chip;
+      });
+      chips.forEach((c) => c.classList.toggle("is-active", c === activeChip));
+    });
     v.src = slot.dataset.video;
     frame.append(v);
     slot._video = v;
@@ -73,11 +86,26 @@
   // Step chips seek the clip in the same figure.
   document.querySelectorAll(".step-chip").forEach((chip) => {
     chip.addEventListener("click", () => {
-      const slot = chip.closest("figure").querySelector(".slot") || chip.closest(".slot");
+      const figure = chip.closest("figure");
+      const slot = figure ? figure.querySelector(".slot") : chip.closest(".slot");
+      if (!slot) return;
+      if (!slot._video) load(slot);
       const t = parseFloat(chip.dataset.seek);
-      if (!slot || !slot._video || Number.isNaN(t)) return;
-      slot._video.currentTime = t;
-      slot._video.play().catch(() => {});
+      if (Number.isNaN(t)) return;
+      const v = slot._video;
+      if (!v) return;
+      const doSeek = () => {
+        try { v.currentTime = t; } catch (e) {}
+        v.play().catch(() => {});
+      };
+      if (v.readyState >= 1) {
+        doSeek();
+      } else {
+        v.addEventListener("loadedmetadata", doSeek, { once: true });
+      }
+      if (figure) {
+        figure.querySelectorAll(".step-chip").forEach((c) => c.classList.toggle("is-active", c === chip));
+      }
     });
   });
 

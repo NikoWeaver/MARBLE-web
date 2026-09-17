@@ -113,8 +113,36 @@ figcaption strong { color: var(--ink-2); }
 
 /* Step chips */
 .steps { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 12px 0 0; }
-.step-chip { display: inline-flex; gap: 8px; align-items: baseline; font: 500 13px var(--font); color: var(--ink); background: var(--bg-soft); border: 1px solid var(--rule); border-radius: 999px; padding: 6px 12px; cursor: pointer; }
-.step-chip:hover { border-color: var(--accent); }
+.step-chip {
+  display: inline-flex;
+  gap: 8px;
+  align-items: baseline;
+  font: 500 13px var(--font);
+  color: var(--ink);
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 6px 12px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s;
+}
+.step-chip:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.step-chip:active {
+  transform: scale(0.97);
+}
+.step-chip.is-active {
+  background: var(--accent-soft);
+  border-color: var(--accent);
+  color: var(--accent);
+  font-weight: 600;
+}
+.step-chip.is-active .step-time {
+  color: var(--accent);
+  font-weight: 700;
+}
 .step-time { font-variant-numeric: tabular-nums; color: var(--ink-3); }
 
 /* Grids */
