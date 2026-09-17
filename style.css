@@ -167,16 +167,17 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
 .todo.snippet p { margin: 0; font-style: italic; }
 
 /* 3D Robot Model Viewer */
-.viewer-3d-figure { margin: 0; }
+.viewer-3d-figure {
+  margin: 0;
+}
 .model-viewer-frame {
   position: relative;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--slot) 62%, #2f3442) 0%, var(--slot) 100%);
-  border: 1px solid var(--rule);
+  width: 100%;
   aspect-ratio: 16 / 9;
   max-height: min(640px, 85vh);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  background: transparent;
+  border: none;
+  box-shadow: none;
   cursor: grab;
   touch-action: none;
 }
@@ -185,6 +186,7 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
   width: 100%;
   height: 100%;
   display: block;
+  background: transparent;
 }
 #robot-canvas:focus-visible {
   outline: 2px solid var(--accent);
@@ -199,14 +201,14 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
   gap: 7px;
   font-size: 12px;
   font-weight: 500;
-  color: rgba(255, 255, 255, 0.92);
-  background: color-mix(in srgb, var(--slot) 72%, transparent);
+  color: var(--ink-2);
+  background: color-mix(in srgb, var(--bg-soft) 85%, transparent);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   padding: 5px 12px;
   border-radius: 999px;
   pointer-events: none;
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  border: 1px solid var(--rule);
   z-index: 5;
   white-space: nowrap;
   max-width: calc(100% - 28px);
@@ -226,34 +228,32 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
   transform: translateY(-4px);
 }
 .viewer-controls {
-  position: absolute;
-  right: 14px;
-  bottom: 14px;
   display: flex;
-  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 16px 0 12px;
   flex-wrap: wrap;
-  z-index: 5;
 }
 .viewer-btn {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  font: 600 12px var(--font);
-  color: #fff;
-  background: color-mix(in srgb, var(--slot) 78%, transparent);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 7px;
-  padding: 6px 12px;
+  font: 500 13px var(--font);
+  color: var(--ink);
+  background: var(--bg-soft);
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 7px 15px;
   cursor: pointer;
   user-select: none;
   -webkit-user-select: none;
-  transition: background 0.15s, border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+  transition: background 0.15s, border-color 0.15s, color 0.15s, transform 0.1s, box-shadow 0.15s;
 }
 .viewer-btn:hover {
-  background: color-mix(in srgb, var(--slot) 88%, #fff 12%);
+  background: color-mix(in srgb, var(--bg-soft) 70%, var(--accent-soft));
   border-color: var(--accent);
+  color: var(--accent);
 }
 .viewer-btn:active { transform: scale(0.97); }
 .viewer-btn:focus-visible {
@@ -261,8 +261,9 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
   outline-offset: 2px;
 }
 .viewer-btn.is-paused {
-  background: color-mix(in srgb, var(--accent) 22%, var(--slot));
+  background: var(--accent-soft);
   border-color: var(--accent);
+  color: var(--accent);
 }
 .viewer-btn .btn-icon { font-size: 11px; line-height: 1; }
 
@@ -274,10 +275,12 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
   align-items: center;
   justify-content: center;
   gap: 12px;
-  color: #fff;
+  color: var(--ink-2);
   font-size: 13px;
   font-weight: 500;
-  background: var(--slot);
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   transition: opacity 0.3s ease;
   z-index: 10;
 }
@@ -288,7 +291,7 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
 .viewer-loading .spinner {
   width: 28px;
   height: 28px;
-  border: 2.5px solid rgba(255, 255, 255, 0.15);
+  border: 2.5px solid var(--rule);
   border-top-color: var(--accent);
   border-radius: 50%;
   animation: viewer-spin 0.75s linear infinite;
@@ -314,28 +317,23 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
     height: 12px;
   }
   .viewer-controls {
-    left: 10px;
-    right: 10px;
-    bottom: 10px;
     gap: 6px;
-    justify-content: flex-end;
+    margin: 12px 0 8px;
   }
   .viewer-btn {
-    padding: 5px 9px;
-    font-size: 11px;
-    gap: 4px;
-    border-radius: 6px;
+    padding: 6px 11px;
+    font-size: 12px;
+    gap: 5px;
   }
 }
 
 @media (max-width: 440px) {
   .viewer-controls {
-    justify-content: center;
     gap: 5px;
   }
   .viewer-btn {
-    padding: 5px 8px;
-    font-size: 10.5px;
+    padding: 5px 9px;
+    font-size: 11px;
   }
   .viewer-btn .btn-icon {
     font-size: 10px;

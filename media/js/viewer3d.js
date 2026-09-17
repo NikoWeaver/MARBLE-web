@@ -43,6 +43,7 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
   renderer.outputColorSpace = THREE.SRGBColorSpace;
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.18;
+  renderer.setClearColor(0x000000, 0);
 
   // --- OrbitControls ---
   const controls = new OrbitControls(camera, canvas);
