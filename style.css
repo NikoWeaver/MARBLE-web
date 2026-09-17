@@ -426,4 +426,4 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
 .gallery-item figcaption { margin-top: 8px; text-align: center; }
 @media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 480px) { .gallery { grid-template-columns: minmax(0, 1fr); } }
-.clip-note { margin: 6px 0 0; font-size: 13px; color: var(--ink-3); text-align: center; }
+.clip-note { position: absolute; right: 10px; bottom: 10px; margin: 0; z-index: 2; font-size: 12px; font-weight: 600; color: #fff; background: rgba(0,0,0,.55); padding: 3px 8px; border-radius: 6px; pointer-events: none; }
