@@ -2,6 +2,7 @@
 // The poster (a still from the paper) or a dark box shows until the clip loads.
 // A missing clip leaves a "Video placeholder: <path>" tag so the empty slot is obvious.
 (function () {
+  "use strict";
   const slots = [...document.querySelectorAll(".slot")];
 
   slots.forEach((slot) => {

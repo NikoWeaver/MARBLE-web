@@ -164,3 +164,193 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
 /* Short text placeholders the authors fill in */
 .todo.snippet { border-style: dashed; margin: 0 0 20px; }
 .todo.snippet p { margin: 0; font-style: italic; }
+
+/* 3D Robot Model Viewer */
+.viewer-3d-figure { margin: 0; }
+.model-viewer-frame {
+  position: relative;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 45%, color-mix(in srgb, var(--slot) 62%, #2f3442) 0%, var(--slot) 100%);
+  border: 1px solid var(--rule);
+  aspect-ratio: 16 / 9;
+  max-height: min(640px, 85vh);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  cursor: grab;
+  touch-action: none;
+}
+.model-viewer-frame:active { cursor: grabbing; }
+#robot-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#robot-canvas:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+.viewer-hint-badge {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.92);
+  background: color-mix(in srgb, var(--slot) 72%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 5px 12px;
+  border-radius: 999px;
+  pointer-events: none;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  z-index: 5;
+  white-space: nowrap;
+  max-width: calc(100% - 28px);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0.35s ease;
+}
+.viewer-hint-badge svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+.viewer-hint-badge span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.viewer-hint-badge.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+}
+.viewer-controls {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  z-index: 5;
+}
+.viewer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font: 600 12px var(--font);
+  color: #fff;
+  background: color-mix(in srgb, var(--slot) 78%, transparent);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 7px;
+  padding: 6px 12px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: background 0.15s, border-color 0.15s, transform 0.1s, box-shadow 0.15s;
+}
+.viewer-btn:hover {
+  background: color-mix(in srgb, var(--slot) 88%, #fff 12%);
+  border-color: var(--accent);
+}
+.viewer-btn:active { transform: scale(0.97); }
+.viewer-btn:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.viewer-btn.is-paused {
+  background: color-mix(in srgb, var(--accent) 22%, var(--slot));
+  border-color: var(--accent);
+}
+.viewer-btn .btn-icon { font-size: 11px; line-height: 1; }
+
+.viewer-loading {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 500;
+  background: var(--slot);
+  transition: opacity 0.3s ease;
+  z-index: 10;
+}
+.viewer-loading.is-loaded {
+  opacity: 0;
+  pointer-events: none;
+}
+.viewer-loading .spinner {
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid rgba(255, 255, 255, 0.15);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: viewer-spin 0.75s linear infinite;
+}
+@keyframes viewer-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 640px) {
+  .model-viewer-frame {
+    aspect-ratio: 4 / 3;
+    max-height: min(480px, 75vh);
+  }
+  .viewer-hint-badge {
+    top: 10px;
+    left: 10px;
+    padding: 4px 10px;
+    font-size: 11px;
+    max-width: calc(100% - 20px);
+  }
+  .viewer-hint-badge svg {
+    width: 12px;
+    height: 12px;
+  }
+  .viewer-controls {
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    gap: 6px;
+    justify-content: flex-end;
+  }
+  .viewer-btn {
+    padding: 5px 9px;
+    font-size: 11px;
+    gap: 4px;
+    border-radius: 6px;
+  }
+}
+
+@media (max-width: 440px) {
+  .viewer-controls {
+    justify-content: center;
+    gap: 5px;
+  }
+  .viewer-btn {
+    padding: 5px 8px;
+    font-size: 10.5px;
+  }
+  .viewer-btn .btn-icon {
+    font-size: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .viewer-loading .spinner {
+    animation: none;
+  }
+  .viewer-btn {
+    transition: none;
+  }
+  .viewer-hint-badge {
+    transition: none;
+  }
+}
+
+

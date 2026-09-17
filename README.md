@@ -31,7 +31,7 @@ Drop a file at the given path and it will play; if it's missing, `main.js` falls
 | `media/videos/fig3-water-geometric.mp4` | MuJoCo rollout, water, geometric controller, 0.5 m/s | Fig. 3 |
 | `media/videos/fig3-water-learned.mp4` | MuJoCo rollout, water, learned controller, 0.5 m/s | Fig. 3 |
 | `media/videos/fig4a-terrestrial.mp4` | Full run behind the terrestrial time-lapse | Fig. 4(a) |
-| `media/videos/fig1c-water.mp4` | Aquatic run (same clip as Fig. 1(c)) | Fig. 4(b) |
+| `media/videos/fig4b-aquatic.mp4` | Aquatic loop run (source video not yet provided; shot from the low bank) | Fig. 4(b) |
 | `media/videos/fig4c-transition.mp4` | Full run behind the transition time-lapse | Fig. 4(c) |
 | `media/videos/fig5a-learned.mp4` | Joystick omnidirectional run, learned controller | Fig. 5 |
 | `media/videos/fig5b-geometric.mp4` | Joystick omnidirectional run, geometric controller | Fig. 5 |

@@ -206,7 +206,8 @@ def check_missing_media(assets):
         value = asset["value"]
         if not value or value.startswith("http://") or value.startswith("https://"):
             continue
-        local_path = os.path.join(REPO_ROOT, value)
+        clean_value = value.split("?")[0].split("#")[0]
+        local_path = os.path.join(REPO_ROOT, clean_value)
         if not os.path.exists(local_path):
             missing.append(asset)
     return missing
