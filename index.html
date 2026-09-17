@@ -118,31 +118,6 @@
     </div>
   </div>
 
-  <figure class="viewer-3d-figure spacer">
-    <div class="model-viewer-frame" id="model-viewer-frame" role="region" aria-label="Interactive 3D model of MARBLE internal mechanism and mass sliders">
-      <canvas id="robot-canvas" role="img" tabindex="0" aria-label="Interactive 3D mechanical model. Use drag or arrow keys to rotate, scroll or pinch to zoom.">Interactive 3D assembly of the MARBLE robot.</canvas>
-      <div class="viewer-hint-badge" aria-hidden="true">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
-        <span>Interactive 3D · Drag to spin · Scroll to zoom</span>
-      </div>
-      <div class="viewer-loading" id="viewer-loading" role="status" aria-live="polite">
-        <div class="spinner" aria-hidden="true"></div>
-        <span>Loading 3D Assembly...</span>
-      </div>
-    </div>
-    <div class="viewer-controls" role="toolbar" aria-label="3D model viewer controls">
-      <button type="button" class="viewer-btn" id="btn-toggle-motion" title="Pause or play mass slider motion" aria-label="Pause slider motion" aria-pressed="false">
-        <span class="btn-icon" aria-hidden="true">⏸</span> <span class="btn-text">Motion: On</span>
-      </button>
-      <button type="button" class="viewer-btn" id="btn-toggle-shell" title="Toggle outer shell visibility" aria-label="Shell mode: Translucent. Click to change">
-        <span class="btn-icon" aria-hidden="true">👁</span> <span class="btn-text">Shell: Translucent</span>
-      </button>
-      <button type="button" class="viewer-btn" id="btn-reset-cam" title="Reset camera angle" aria-label="Reset camera view">
-        <span class="btn-icon" aria-hidden="true">↺</span> <span class="btn-text">Reset View</span>
-      </button>
-    </div>
-    <figcaption><strong>Fig. 2(e).</strong> Interactive 3D mechanical model showing slider movement and hardware configuration.</figcaption>
-  </figure>
 
   <h3>Locomotion Principle</h3>
   <p class="snippet">Simplified example of how MARBLE uses moving mass to roll.</p>
@@ -247,15 +222,7 @@
   <h3>Object Interaction with Direct Shell Contact</h3>
   <p class="snippet">MARBLE's enclosed actuation results in a contact resistant design that can push past obstacles without injury.</p>
   <figure>
-    <div class="slot" data-video="media/videos/fig6-buoy-push.mp4" data-seek-clips aria-label="Obstacle interaction with a buoy"><span class="media-frame"></span></div>
-    <ol class="steps" aria-label="Phases in this run">
-      <li><button type="button" class="step-chip is-active" data-seek="0" aria-pressed="true"><span class="step-time">0:00</span><span class="step-label">approach</span></button></li>
-      <li><button type="button" class="step-chip" data-seek="4" aria-pressed="false"><span class="step-time">0:04</span><span class="step-label">contact</span></button></li>
-      <li><button type="button" class="step-chip" data-seek="6" aria-pressed="false"><span class="step-time">0:06</span><span class="step-label">push</span></button></li>
-      <li><button type="button" class="step-chip" data-seek="20" aria-pressed="false"><span class="step-time">0:20</span><span class="step-label">approach</span></button></li>
-      <li><button type="button" class="step-chip" data-seek="22" aria-pressed="false"><span class="step-time">0:22</span><span class="step-label">contact</span></button></li>
-      <li><button type="button" class="step-chip" data-seek="24" aria-pressed="false"><span class="step-time">0:24</span><span class="step-label">push</span></button></li>
-    </ol>
+    <div class="slot" data-video="media/videos/fig6-buoy-push.mp4" aria-label="Obstacle interaction with a buoy"><span class="media-frame"></span></div>
     <div class="fig-img spacer wide-strip"><img src="media/figures/fig6-sequence.jpg" alt="Representative time-lapse sequence of obstacle interaction showing approach, direct shell contact, and continuous interaction with the buoy" loading="lazy"></div>
     <figcaption><strong>Fig. 6.</strong> Representative time-lapse sequence of obstacle interaction showing approach, direct shell contact, and continuous interaction with the buoy (red).</figcaption>
   </figure>
@@ -293,15 +260,6 @@
 
 <footer class="site-footer">Anonymous Authors</footer>
 
-<script type="importmap">
-{
-  "imports": {
-    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-    "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-  }
-}
-</script>
-<script src="media/js/viewer3d.js?v=7"></script>
-<script src="main.js?v=10"></script>
+<script src="main.js?v=11"></script>
 </body>
 </html>
