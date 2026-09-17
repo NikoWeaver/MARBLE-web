@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
-<link rel="stylesheet" href="style.css?v=5">
+<link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -20,7 +20,6 @@
       <li><a href="#overview">Overview</a></li>
       <li><a href="#abstract">Abstract</a></li>
       <li><a href="#design">Design</a></li>
-      <li><a href="#control">Control</a></li>
       <li><a href="#experiments">Experiments</a></li>
     </ul>
   </div>
@@ -35,10 +34,7 @@
 
 <!-- ============ Overview: Fig. 1 ============ -->
 <section class="section wrap-wide" id="overview">
-  <div class="todo snippet">
-    <h4>Snippet: lead</h4>
-    <p>One sentence under the title: what MARBLE is and what the videos below show.</p>
-  </div>
+  <p class="snippet">MARBLE navigates amphibious environments without hardware reconfiguration, using one locomotion system.</p>
   <figure>
     <div class="lead">
       <div class="slot" data-video="media/videos/fig1a-land-to-water.mp4" data-poster="media/posters/fig1a.jpg" aria-label="Land-to-water entry">
@@ -82,10 +78,7 @@
 
   <div class="grid-2 spacer">
     <div>
-      <div class="todo snippet">
-          <h4>Snippet: design</h4>
-          <p>Two sentences max: the shell, fins, and the three mass sliders shown in Fig. 2.</p>
-        </div>
+      <p class="snippet">Three orthogonal mass sliders change MARBLE's center of mass dynamically to induce rolling. All of the actuation is enclosed in a sealed shell. The shell acts as a buoyancy device, and symmetrically distributed fins work to propel MARBLE when operating on water.</p>
     </div>
     <div>
       <table class="spec">
@@ -131,10 +124,7 @@
   </figure>
 
   <h3>Locomotion Principle</h3>
-  <div class="todo snippet">
-    <h4>Snippet: locomotion principle</h4>
-    <p>One or two sentences: how shifting the internal masses rolls the shell on land and drives the fins on water.</p>
-  </div>
+  <p class="snippet">Simplified example of how MARBLE uses moving mass to roll.</p>
   <figure class="spacer">
     <div class="fig-img principle wide-strip"><img src="media/figures/fig3-principle.svg" width="894" height="174" alt="Displacing the internal slider masses offsets the center of gravity from the shell center, and the resulting moment about the ground contact rolls the shell" loading="lazy"></div>
     <div class="fig-img principle spacer"><img src="media/figures/fig3-simulation.jpg" width="1909" height="1394" alt="Simulation of ground and water-surface locomotion at 0.5 m/s using geometric and learned controllers, sampled at the same instants" loading="lazy"></div>
@@ -148,24 +138,6 @@
   </figure>
 </section>
 
-<!-- ============ Control ============ -->
-<section class="section wrap-wide" id="control">
-  <div class="wrap" style="padding:0">
-    <span class="eyebrow" aria-hidden="true"></span>
-    <h2>Control</h2>
-  </div>
-  <div class="grid-2">
-    <div class="todo snippet">
-        <h4>Snippet: geometric controller</h4>
-        <p>One sentence: what the controller does, and where to see it (Fig. 3, Fig. 5b).</p>
-      </div>
-    <div class="todo snippet">
-        <h4>Snippet: learned controller</h4>
-        <p>One sentence: how the policy is trained and deployed, and where to see it (Fig. 3, Fig. 5a).</p>
-      </div>
-  </div>
-</section>
-
 <!-- ============ Experiments ============ -->
 <section class="section wrap-wide" id="experiments">
   <div class="wrap" style="padding:0">
@@ -175,10 +147,7 @@
 
   <!-- A -->
   <h3>Terrestrial, Aquatic, and Transitional Locomotion</h3>
-  <div class="todo snippet">
-    <h4>Snippet: land, water, and transition</h4>
-    <p>One sentence: what the three runs in Fig. 4 show.</p>
-  </div>
+  <p class="snippet">The speed of MARBLE was characterized on Land, Water, and mixed terrain.</p>
   <figure>
     <div class="grid-3">
       <div class="stack">
@@ -216,10 +185,7 @@
   </figure>
   <!-- B -->
   <h3>Omnidirectional Velocity Characterization</h3>
-  <div class="todo snippet">
-    <h4>Snippet: omnidirectional velocity</h4>
-    <p>One sentence: what to notice when comparing the learned and geometric controllers in Fig. 5.</p>
-  </div>
+  <p class="snippet">Trained vs geometric controller velocity characterization.</p>
   <figure>
     <div class="grid-2">
       <div class="stack">
@@ -247,10 +213,7 @@
   </figure>
   <!-- C -->
   <h3>Object Interaction with Direct Shell Contact</h3>
-  <div class="todo snippet">
-    <h4>Snippet: obstacle interaction</h4>
-    <p>One sentence: what happens when the shell pushes the buoy in Fig. 6.</p>
-  </div>
+  <p class="snippet">MARBLE's enclosed actuation results in a contact resistant design that can push past obstacles without injury.</p>
   <figure>
     <div class="slot" data-video="media/videos/fig6-buoy-push.mp4" aria-label="Obstacle interaction with a buoy"><span class="media-frame"></span></div>
     <ol class="steps" aria-label="Phases in this run">
@@ -263,14 +226,6 @@
   </figure>
   <!-- Additional trials -->
   <h3>Additional Trials</h3>
-  <div class="todo">
-    <h4>TODO: additional trials carousel</h4>
-    <ul>
-      <li>One clip per slide: media/videos/trial-01.mp4 … trial-04.mp4 (add or remove slides as needed)</li>
-      <li>Candidates from the paper: heterogeneous terrestrial surfaces, water-surface runs, land-water transitions, obstacle contact</li>
-      <li>Short label per clip; rename this heading or delete the section if unused</li>
-    </ul>
-  </div>
   <div class="carousel">
     <div class="carousel-track">
       <div class="slot" data-video="media/videos/trial-01.mp4" aria-label="Trial 1"><span class="media-frame"><span class="slot-label">Trial 1</span></span></div>
@@ -306,7 +261,7 @@
   }
 }
 </script>
-<script type="module" src="media/js/viewer3d.js?v=2"></script>
+<script type="module" src="media/js/viewer3d.js?v=3"></script>
 <script src="main.js?v=5"></script>
 </body>
 </html>

@@ -67,18 +67,18 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
   });
 
   // --- Lighting ---
-  const ambientLight = new THREE.AmbientLight(0xffffff, 1.5);
+  const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
   scene.add(ambientLight);
 
-  const keyLight = new THREE.DirectionalLight(0xfff8ee, 2.4);
+  const keyLight = new THREE.DirectionalLight(0xfff8ee, 2.5);
   keyLight.position.set(2.2, 3.8, 2.5);
   scene.add(keyLight);
 
-  const fillLight = new THREE.DirectionalLight(0xe8f0ff, 1.4);
+  const fillLight = new THREE.DirectionalLight(0xe8f0ff, 1.2);
   fillLight.position.set(-2.5, -1.0, -2.0);
   scene.add(fillLight);
 
-  const rimLight = new THREE.DirectionalLight(0xffffff, 1.0);
+  const rimLight = new THREE.DirectionalLight(0xffffff, 0.9);
   rimLight.position.set(0.0, -3.0, 1.5);
   scene.add(rimLight);
 
@@ -88,7 +88,7 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
       color: 0x222224, roughness: 0.75, metalness: 0.1
     }),
     mat_ABS_White: new THREE.MeshStandardMaterial({
-      color: 0xf4f4f3, roughness: 0.45, metalness: 0.05
+      color: 0xf4f4f3, roughness: 0.75, metalness: 0.0
     }),
     mat_Carbon_Fiber_Plain: new THREE.MeshStandardMaterial({
       color: 0x2d2d30, roughness: 0.4, metalness: 0.3
@@ -109,13 +109,13 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
       color: 0xe2e5ea, roughness: 0.4, metalness: 0.5
     }),
     mat_Opaque_229_234_237_2: new THREE.MeshStandardMaterial({
-      color: 0xe2e5ea, roughness: 0.6, metalness: 0.2
+      color: 0xe2e5ea, roughness: 0.7, metalness: 0.1
     }),
     mat_Rubber_Soft: new THREE.MeshStandardMaterial({
       color: 0x141414, roughness: 0.9, metalness: 0.0
     }),
     mat_ABS_White_2: new THREE.MeshStandardMaterial({
-      color: 0xf2f5f9, roughness: 0.22, metalness: 0.05, transparent: true, opacity: 0.38, depthWrite: false
+      color: 0xe5e9f0, roughness: 0.92, metalness: 0.0, transparent: true, opacity: 0.36, depthWrite: false
     }),
     mat_Slider_Weight: new THREE.MeshStandardMaterial({
       color: 0xc8cbd2, roughness: 0.28, metalness: 0.9
@@ -185,7 +185,9 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
     if (shellMode === 0) {
       shellGroup.visible = true;
       materials.mat_ABS_White_2.transparent = true;
-      materials.mat_ABS_White_2.opacity = 0.38;
+      materials.mat_ABS_White_2.opacity = 0.36;
+      materials.mat_ABS_White_2.roughness = 0.92;
+      materials.mat_ABS_White_2.metalness = 0.0;
       materials.mat_ABS_White_2.depthWrite = false;
       materials.mat_ABS_White_2.needsUpdate = true;
       if (btnShell) btnShell.querySelector(".btn-text").textContent = "Shell: Translucent";
@@ -196,6 +198,8 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
       shellGroup.visible = true;
       materials.mat_ABS_White_2.transparent = false;
       materials.mat_ABS_White_2.opacity = 1.0;
+      materials.mat_ABS_White_2.roughness = 0.92;
+      materials.mat_ABS_White_2.metalness = 0.0;
       materials.mat_ABS_White_2.depthWrite = true;
       materials.mat_ABS_White_2.needsUpdate = true;
       if (btnShell) btnShell.querySelector(".btn-text").textContent = "Shell: Opaque";
