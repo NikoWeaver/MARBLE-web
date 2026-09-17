@@ -70,6 +70,27 @@
         c.setAttribute("aria-pressed", isCurrent ? "true" : "false");
       });
     });
+    // Some hosts (e.g. anonymous.4open.science) ignore HTTP Range requests, so the
+    // browser reports nothing seekable and step chips snap back to 0. When that
+    // happens, fetch the whole clip once and play it from a Blob URL, which is
+    // always seekable, then re-apply any seek the viewer asked for.
+    v.addEventListener("loadedmetadata", () => {
+      const canSeek = v.seekable.length > 0 && v.seekable.end(v.seekable.length - 1) > 0;
+      if (canSeek || slot._blobTried || !window.fetch || !window.URL) return;
+      slot._blobTried = true;
+      fetch(slot.dataset.video)
+        .then((r) => { if (!r.ok) throw new Error(r.status); return r.blob(); })
+        .then((blob) => {
+          const wasPlaying = !v.paused;
+          const resumeAt = slot._pendingSeek != null ? slot._pendingSeek : v.currentTime;
+          v.src = URL.createObjectURL(blob);
+          v.addEventListener("loadedmetadata", () => {
+            try { v.currentTime = resumeAt; } catch (e) {}
+            if (wasPlaying || slot._pendingSeek != null) v.play().catch(() => {});
+          }, { once: true });
+        })
+        .catch(() => {});
+    }, { once: true });
     v.src = slot.dataset.video;
     frame.append(v);
     slot._video = v;
