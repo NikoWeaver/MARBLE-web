@@ -56,16 +56,23 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.6;
 
+  const hintBadge = container.querySelector(".viewer-hint-badge");
+  controls.listenToKeyEvents(canvas);
+
   let idleTimer = null;
   controls.addEventListener("start", () => {
     controls.autoRotate = false;
     if (idleTimer) clearTimeout(idleTimer);
+    if (hintBadge) hintBadge.classList.add("is-hidden");
   });
   controls.addEventListener("end", () => {
     idleTimer = setTimeout(() => {
       controls.autoRotate = true;
     }, 4000);
   });
+  setTimeout(() => {
+    if (hintBadge) hintBadge.classList.add("is-hidden");
+  }, 4000);
 
   // --- Lighting ---
   const ambientLight = new THREE.AmbientLight(0xffffff, 1.2);
@@ -172,7 +179,7 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
   });
   const shadowMesh = new THREE.Mesh(shadowGeo, shadowMat);
   shadowMesh.rotation.x = -Math.PI / 2;
-  shadowMesh.position.y = -0.196;
+  shadowMesh.position.y = -0.2025;
   scene.add(shadowMesh);
 
   const frameGroup = new THREE.Group();
@@ -203,9 +210,15 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
   const stroke = 0.088; // 88 mm amplitude (physical limit is 110 mm)
   const freq = 1.85;    // rad/s
   const clock = new THREE.Clock();
+  let simTime = 0;
 
   // Shell modes: 0: Translucent, 1: Hidden, 2: Opaque
   let shellMode = 0;
+  const shellModes = [
+    { text: "Shell: Translucent", label: "Shell mode: Translucent. Click to hide" },
+    { text: "Shell: Hidden", label: "Shell mode: Hidden. Click to make opaque" },
+    { text: "Shell: Opaque", label: "Shell mode: Opaque. Click to make translucent" }
+  ];
 
   function updateShellDisplay() {
     if (shellMode === 0) {
@@ -216,10 +229,8 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
       materials.mat_ABS_White_2.metalness = 0.0;
       materials.mat_ABS_White_2.depthWrite = false;
       materials.mat_ABS_White_2.needsUpdate = true;
-      if (btnShell) btnShell.querySelector(".btn-text").textContent = "Shell: Translucent";
     } else if (shellMode === 1) {
       shellGroup.visible = false;
-      if (btnShell) btnShell.querySelector(".btn-text").textContent = "Shell: Hidden";
     } else {
       shellGroup.visible = true;
       materials.mat_ABS_White_2.transparent = false;
@@ -228,7 +239,11 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
       materials.mat_ABS_White_2.metalness = 0.0;
       materials.mat_ABS_White_2.depthWrite = true;
       materials.mat_ABS_White_2.needsUpdate = true;
-      if (btnShell) btnShell.querySelector(".btn-text").textContent = "Shell: Opaque";
+    }
+    if (btnShell) {
+      const text = btnShell.querySelector(".btn-text");
+      if (text) text.textContent = shellModes[shellMode].text;
+      btnShell.setAttribute("aria-label", shellModes[shellMode].label);
     }
   }
 
@@ -366,10 +381,14 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
         text.textContent = "Motion: On";
         icon.textContent = "⏸";
         btnMotion.classList.remove("is-paused");
+        btnMotion.setAttribute("aria-pressed", "false");
+        btnMotion.setAttribute("aria-label", "Pause slider motion");
       } else {
         text.textContent = "Motion: Paused";
         icon.textContent = "▶";
         btnMotion.classList.add("is-paused");
+        btnMotion.setAttribute("aria-pressed", "true");
+        btnMotion.setAttribute("aria-label", "Resume slider motion");
       }
     });
   }
@@ -394,8 +413,10 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
     if (!container) return;
     const w = container.clientWidth;
     const h = container.clientHeight;
+    if (w === 0 || h === 0) return;
     camera.aspect = w / h;
     camera.updateProjectionMatrix();
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(w, h);
   }
   window.addEventListener("resize", onResize, { passive: true });
@@ -411,9 +432,13 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
     }
     reqId = requestAnimationFrame(animate);
 
-    // Sinusoidal actuator oscillation with 120° phase offsets along local joint axes
+    const delta = Math.min(clock.getDelta(), 0.1);
+
+    // Continuous sinusoidal oscillation without teleportation on pause/resume
     if (motionEnabled) {
-      const t = clock.getElapsedTime() * freq;
+      simTime += delta;
+      const t = simTime * freq;
+
       // Joint 7 (base / Slider X): orthogonal along parent X axis
       const dispX = stroke * Math.sin(t);
       if (sliderXGroup) {
@@ -442,7 +467,7 @@ import { STLLoader } from "three/addons/loaders/STLLoader.js";
       entries.forEach((e) => {
         isVisible = e.isIntersecting;
         if (isVisible && reqId === null) {
-          clock.start();
+          clock.getDelta(); // flush delta to prevent jump
           animate();
         }
       });

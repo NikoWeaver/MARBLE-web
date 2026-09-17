@@ -8,8 +8,8 @@
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap">
-<link rel="stylesheet" href="style.css?v=10">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
+<link rel="stylesheet" href="style.css?v=11">
 <script>
 (function() {
   try {
@@ -52,6 +52,7 @@
   <p class="hero-note">Anonymized submission; the authors and the affiliation are withheld. The software and the hardware design will be open sourced on acceptance.</p>
 </header>
 
+<main id="main">
 <!-- ============ Overview: Fig. 1 ============ -->
 <section class="section wrap-wide" id="overview">
   <p class="snippet">MARBLE navigates amphibious environments without hardware reconfiguration, using one locomotion system.</p>
@@ -237,9 +238,9 @@
   <figure>
     <div class="slot" data-video="media/videos/fig6-buoy-push.mp4" aria-label="Obstacle interaction with a buoy"><span class="media-frame"></span></div>
     <ol class="steps" aria-label="Phases in this run">
-      <li><button type="button" class="step-chip" data-seek="0"><span class="step-time">0:00</span><span class="step-label">approach</span></button></li>
-      <li><button type="button" class="step-chip" data-seek="4"><span class="step-time">0:04</span><span class="step-label">contact</span></button></li>
-      <li><button type="button" class="step-chip" data-seek="6"><span class="step-time">0:06</span><span class="step-label">push</span></button></li>
+      <li><button type="button" class="step-chip is-active" data-seek="0" aria-pressed="true"><span class="step-time">0:00</span><span class="step-label">approach</span></button></li>
+      <li><button type="button" class="step-chip" data-seek="4" aria-pressed="false"><span class="step-time">0:04</span><span class="step-label">contact</span></button></li>
+      <li><button type="button" class="step-chip" data-seek="6" aria-pressed="false"><span class="step-time">0:06</span><span class="step-label">push</span></button></li>
     </ol>
     <div class="fig-img spacer wide-strip"><img src="media/figures/fig6-sequence.jpg" alt="Representative time-lapse sequence of obstacle interaction showing approach, direct shell contact, and continuous interaction with the buoy" loading="lazy"></div>
     <figcaption><strong>Fig. 6.</strong> Representative time-lapse sequence of obstacle interaction showing approach, direct shell contact, and continuous interaction with the buoy (red).</figcaption>
@@ -265,11 +266,9 @@
 <section class="section wrap" id="conclusions">
   <span class="eyebrow" aria-hidden="true"></span>
   <h2>Conclusions, Limitations, and Future Work</h2>
-  <div class="todo snippet">
-    <h4>Snippet: takeaway</h4>
-    <p>One or two sentences: the main result and current limitations.</p>
-  </div>
+  <p class="snippet">MARBLE demonstrates continuous amphibious locomotion across terrestrial, aquatic, and transitional regimes using internal mass actuation enclosed within a sealed, finned shell. Future work focuses on closed-loop feedback control and dynamic obstacle navigation in turbulent outdoor environments.</p>
 </section>
+</main>
 
 <footer class="site-footer">Anonymous Authors</footer>
 
@@ -281,7 +280,7 @@
   }
 }
 </script>
-<script type="module" src="media/js/viewer3d.js?v=5"></script>
-<script src="main.js?v=7"></script>
+<script type="module" src="media/js/viewer3d.js?v=6"></script>
+<script src="main.js?v=8"></script>
 </body>
 </html>

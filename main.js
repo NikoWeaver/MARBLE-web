@@ -48,7 +48,9 @@
       link.textContent = "Play this clip";
       link.hidden = true;
       frame.after(link);
-      v.play().catch(() => { v.controls = true; link.hidden = false; });
+      if (slot._isInView) {
+        v.play().catch(() => { v.controls = true; link.hidden = false; });
+      }
     }, { once: true });
     v.addEventListener("error", () => v.remove(), { once: true });
     v.addEventListener("timeupdate", () => {
@@ -62,7 +64,11 @@
         const seek = parseFloat(chip.dataset.seek);
         if (!Number.isNaN(seek) && cur >= seek) activeChip = chip;
       });
-      chips.forEach((c) => c.classList.toggle("is-active", c === activeChip));
+      chips.forEach((c) => {
+        const isCurrent = c === activeChip;
+        c.classList.toggle("is-active", isCurrent);
+        c.setAttribute("aria-pressed", isCurrent ? "true" : "false");
+      });
     });
     v.src = slot.dataset.video;
     frame.append(v);
@@ -73,11 +79,13 @@
     entries.forEach((e) => {
       const slot = e.target;
       if (e.isIntersecting) {
+        slot._isInView = true;
         load(slot);
         const v = slot._video;
         if (v && slot.classList.contains("is-loaded")) v.play().catch(() => {});
-      } else if (slot._video) {
-        slot._video.pause();
+      } else {
+        slot._isInView = false;
+        if (slot._video) slot._video.pause();
       }
     });
   }, { rootMargin: "200px 0px" });
@@ -94,17 +102,26 @@
       if (Number.isNaN(t)) return;
       const v = slot._video;
       if (!v) return;
+      slot._pendingSeek = t;
       const doSeek = () => {
-        try { v.currentTime = t; } catch (e) {}
+        try { v.currentTime = slot._pendingSeek; } catch (e) {}
         v.play().catch(() => {});
       };
       if (v.readyState >= 1) {
         doSeek();
-      } else {
-        v.addEventListener("loadedmetadata", doSeek, { once: true });
+      } else if (!slot._seekingAttached) {
+        slot._seekingAttached = true;
+        v.addEventListener("loadedmetadata", () => {
+          slot._seekingAttached = false;
+          doSeek();
+        }, { once: true });
       }
       if (figure) {
-        figure.querySelectorAll(".step-chip").forEach((c) => c.classList.toggle("is-active", c === chip));
+        figure.querySelectorAll(".step-chip").forEach((c) => {
+          const isTarget = c === chip;
+          c.classList.toggle("is-active", isTarget);
+          c.setAttribute("aria-pressed", isTarget ? "true" : "false");
+        });
       }
     });
   });
@@ -133,10 +150,16 @@
   // Highlight the nav link for the section in view.
   const links = [...document.querySelectorAll(".nav-links a")];
   const targets = links.map((a) => document.querySelector(a.getAttribute("href"))).filter(Boolean);
+  const topEl = document.querySelector("#top");
+  if (topEl) targets.unshift(topEl);
   const navIo = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
       if (!e.isIntersecting) return;
-      links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+      if (e.target.id === "top") {
+        links.forEach((a) => a.classList.remove("active"));
+      } else {
+        links.forEach((a) => a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id));
+      }
     });
   }, { rootMargin: "-45% 0px -50% 0px" });
   targets.forEach((t) => navIo.observe(t));

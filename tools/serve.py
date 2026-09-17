@@ -39,15 +39,18 @@ class RangeRequestHandler(SimpleHTTPRequestHandler):
             start = int(start_str)
             end = file_size - 1
         elif end_str:
-            start = file_size - int(end_str)
+            suffix = int(end_str)
+            start = max(0, file_size - suffix)
             end = file_size - 1
         else:
             start = 0
             end = file_size - 1
 
-        if start >= file_size or end >= file_size or start > end:
-            self.send_error(416, "Requested Range Not Satisfiable")
+        if start >= file_size or end >= file_size or start > end or start < 0:
+            self.send_response(416, "Requested Range Not Satisfiable")
             self.send_header("Content-Range", f"bytes */{file_size}")
+            self.send_header("Content-Type", "text/plain")
+            self.send_header("Content-Length", "0")
             self.end_headers()
             return None
 
@@ -64,17 +67,23 @@ class RangeRequestHandler(SimpleHTTPRequestHandler):
 
     def copyfile(self, source, outputfile):
         if not getattr(self, "range", None):
-            return super().copyfile(source, outputfile)
+            try:
+                return super().copyfile(source, outputfile)
+            except (BrokenPipeError, ConnectionResetError):
+                return
 
         start, end = self.range
         remaining = end - start + 1
         buf_size = 64 * 1024
-        while remaining > 0:
-            chunk = source.read(min(remaining, buf_size))
-            if not chunk:
-                break
-            outputfile.write(chunk)
-            remaining -= len(chunk)
+        try:
+            while remaining > 0:
+                chunk = source.read(min(remaining, buf_size))
+                if not chunk:
+                    break
+                outputfile.write(chunk)
+                remaining -= len(chunk)
+        except (BrokenPipeError, ConnectionResetError):
+            pass
 
 def run(port=8000):
     server_address = ("", port)

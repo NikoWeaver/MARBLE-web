@@ -23,7 +23,7 @@ XML_PATH = os.path.join(REPO_ROOT, "robot.xml")
 OUTPUT_GLB = os.path.join(REPO_ROOT, "media", "models", "marble.glb")
 
 # Source STL directory (can be overridden by environment variable)
-STL_DIR = os.environ.get("STL_DIR", os.path.join(REPO_ROOT, "..", "Coding", "legged_env_dev", "asset", "ball_linear_complex", "meshes"))
+STL_DIR = os.environ.get("STL_DIR", os.path.join(REPO_ROOT, "media", "meshes"))
 
 # --- Math Utilities ---
 
