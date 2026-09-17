@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap">
-<link rel="stylesheet" href="style.css?v=11">
+<link rel="stylesheet" href="style.css?v=6">
 <script>
 (function() {
   try {
@@ -148,12 +148,23 @@
   <p class="snippet">Simplified example of how MARBLE uses moving mass to roll.</p>
   <figure class="spacer">
     <div class="fig-img principle wide-strip"><img src="media/figures/fig3-principle.svg" width="894" height="174" alt="Displacing the internal slider masses offsets the center of gravity from the shell center, and the resulting moment about the ground contact rolls the shell" loading="lazy"></div>
-    <div class="fig-img principle spacer"><img src="media/figures/fig3-simulation.jpg" width="1909" height="1394" alt="Simulation of ground and water-surface locomotion at 0.5 m/s using geometric and learned controllers, sampled at the same instants" loading="lazy"></div>
     <div class="grid-4 sim spacer">
-      <div class="slot" data-video="media/videos/fig3-ground-geometric.mp4" data-poster="media/posters/fig3-ground-geometric.jpg" data-aspect="1/1" aria-label="Ground, geometric controller"><span class="media-frame"><span class="slot-label">Ground · geometry</span></span></div>
-      <div class="slot" data-video="media/videos/fig3-ground-learned.mp4" data-poster="media/posters/fig3-ground-learned.jpg" data-aspect="1/1" aria-label="Ground, learned controller"><span class="media-frame"><span class="slot-label">Ground · learned</span></span></div>
-      <div class="slot" data-video="media/videos/fig3-water-geometric.mp4" data-poster="media/posters/fig3-water-geometric.jpg" data-aspect="1/1" aria-label="Water, geometric controller"><span class="media-frame"><span class="slot-label">Water · geometry</span></span></div>
-      <div class="slot" data-video="media/videos/fig3-water-learned.mp4" data-poster="media/posters/fig3-water-learned.jpg" data-aspect="1/1" aria-label="Water, learned controller"><span class="media-frame"><span class="slot-label">Water · learned</span></span></div>
+      <div class="sim-cell">
+        <div class="slot" data-video="media/videos/fig3-ground-geometric.mp4" data-poster="media/posters/fig3-ground-geometric.jpg" data-aspect="1/1" aria-label="Ground, geometric controller"><span class="media-frame"></span></div>
+        <p class="sim-label"><strong>Ground</strong> geometry</p>
+      </div>
+      <div class="sim-cell">
+        <div class="slot" data-video="media/videos/fig3-ground-learned.mp4" data-poster="media/posters/fig3-ground-learned.jpg" data-aspect="1/1" aria-label="Ground, learned controller"><span class="media-frame"></span></div>
+        <p class="sim-label"><strong>Ground</strong> learned</p>
+      </div>
+      <div class="sim-cell">
+        <div class="slot" data-video="media/videos/fig3-water-geometric.mp4" data-poster="media/posters/fig3-water-geometric.jpg" data-aspect="1/1" aria-label="Water, geometric controller"><span class="media-frame"></span></div>
+        <p class="sim-label"><strong>Water</strong> geometry</p>
+      </div>
+      <div class="sim-cell">
+        <div class="slot" data-video="media/videos/fig3-water-learned.mp4" data-poster="media/posters/fig3-water-learned.jpg" data-aspect="1/1" aria-label="Water, learned controller"><span class="media-frame"></span></div>
+        <p class="sim-label"><strong>Water</strong> learned</p>
+      </div>
     </div>
     <figcaption><strong>Fig. 3. Locomotion principle of MARBLE.</strong> Top: displacing the internal slider masses offsets the center of gravity from the shell center, and the resulting moment about the ground contact rolls the shell. Below: simulation of ground and water-surface locomotion at 0.5 m s⁻¹ using geometric and learned controllers, sampled at the same instants. The transparent shell shows the three sliding masses, colored one per rail. The quartered circle denotes their center of gravity, the red dot the shell center, and the blue arrow the heading direction.</figcaption>
   </figure>
