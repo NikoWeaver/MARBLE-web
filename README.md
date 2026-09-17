@@ -36,7 +36,7 @@ Drop a file at the given path and it will play; if it's missing, `main.js` falls
 | `media/videos/fig5a-learned.mp4` | Joystick omnidirectional run, learned controller | Fig. 5 |
 | `media/videos/fig5b-geometric.mp4` | Joystick omnidirectional run, geometric controller | Fig. 5 |
 | `media/videos/fig6-buoy-push.mp4` | Obstacle interaction with the buoy (approach/contact/push) | Fig. 6 |
-| `media/videos/trial-01.mp4` … `trial-04.mp4` | Additional trials carousel | — |
+| `media/videos/early-indoor-no-shell.mp4` + `media/photos/*.jpg` | Additional trials: early indoor video (30 s, silent) and three photos | — |
 
 Step chips (`<button class="step-chip" data-seek="SECONDS">`) mark timestamps inside a slot's figure, e.g. approach/contact/push for Fig. 6. TODO chips ship with `data-seek=""` — fill in the seek time in seconds once the corresponding clip is in place.
 

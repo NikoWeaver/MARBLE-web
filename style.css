@@ -417,3 +417,11 @@ table.paper thead th { border-bottom: 2px solid var(--ink-3); }
 /* Fig. 3 simulation clip labels (under each clip, clear of the in-video speed readout) */
 .sim-label { margin: 8px 0 0; text-align: center; font-size: 15px; color: var(--ink-2); }
 .sim-label strong { color: var(--ink); font-weight: 700; }
+
+/* Additional trials: one video and three photos in a uniform 4:3 grid */
+.gallery { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+.gallery-photo { aspect-ratio: 4 / 3; border-radius: var(--radius); overflow: hidden; background: var(--slot); }
+.gallery-photo img { width: 100%; height: 100%; object-fit: cover; }
+.gallery-item figcaption { margin-top: 8px; text-align: center; }
+@media (max-width: 860px) { .gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 480px) { .gallery { grid-template-columns: minmax(0, 1fr); } }
